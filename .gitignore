@@ -19,3 +19,5 @@ ruby/bin
 tsconfig.json
 .emmyrc.json
 /**/node_modules/
+# JVM heap dumps
+*.hprof
