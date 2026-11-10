@@ -72,6 +72,20 @@
 
 ---
 
+## 🌐 脚本项目 i18n
+
+模板在 `typescript/res/strings/` 提供 `en.json` 和 `zh.json`。构建时资源会复制到 `build/project/res/strings/`，文件名使用 BCP 47 语言标签。脚本跟随 Development Kit 当前语言，不需要在脚本中设置 locale。
+
+TypeScript 入口通过宿主注入的 `$stringResources` 全局变量读取文案：
+
+```typescript
+text.setText($stringResources.getString("demo.counter.label") + state.getValue());
+```
+
+计数标签、按钮文本和按钮下方的语言标识都由 catalog 提供。`demo.language` 是完整文案；例如英文 catalog 写 `Script language: TypeScript`，中文 catalog 写 `脚本语言：TypeScript`。语言专名保持 `TypeScript`。
+
+`m8test.project.description` 可在各语言 catalog 中翻译项目描述。项目名称通过 `m8test.project.name` 覆盖：默认英文名继续来自 `projectConfig.name`（默认为 `TypeScript Script`），英文 catalog 不重复填写项目名称；中文 catalog 填写中文名称即可。这样 `-PappName` 仍可自定义默认/英文名称。
+
 ## 🛠️ 项目开发流程
 
 1. **生成代码提示文件**  
